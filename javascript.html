@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+    <button id="fetchData">AJAX</button>
+    <h1></h1>
+    </ul>
+    <script>
+        $(document).ready(function(){
+            $('h1').html('hackeado')
+            $("#fetchData").click(function(){
+                $.ajax({
+                    url: "https://pokeapi.co/api/v2/pokemon/ditto",
+                    method: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        $("h1").html(`
+                        
+                            <h2>PokeId: ${data.id}</h2>
+                            <h2>PokeName: ${data.forms[0].name}</h2>
+                        `
+                    );
+                    },
+                    error: function (jqXHR, textStatus, errorThrown){
+                        console.error("AJAX ERROR: ", textStatus, errorThrown);
+                        $("#holo").html("<p>Failed to fetch data!</p>");
+                    },
+                });
+            });
+        });
+    </script>
+</body>
+</html>
